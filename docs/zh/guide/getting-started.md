@@ -39,9 +39,9 @@ $ bun add -D just-store.js
 ```
 
 ```html [CDN]
-<script src="https://unpkg.com/just-store.js@latest/dist/foo.browser.min.js"></script>
+<script src="https://unpkg.com/just-store.js@latest/dist/just-store.browser.min.js"></script>
 <!-- or -->
-<script src="https://cdn.jsdelivr.net/npm/just-store.js@latest/dist/foo.browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/just-store.js@latest/dist/just-store.browser.min.js"></script>
 ```
 
 :::

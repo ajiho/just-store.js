@@ -183,7 +183,7 @@ store.remember("start_time", Date.now())
 ```
 
 如果start_time缓存数据不存在，则会设置缓存数据为当前时间。
-第二个参数可以使用闭包方法获取缓存数据，并支持依赖注入。
+第二个参数可以使用闭包方法获取缓存数据。
 
 ```js
 store.remember("start_time", function () {
@@ -235,12 +235,18 @@ store.getTagItems("tag")
 
 ### 获取缓存对象
 
-可以获取缓存对象，并且调用驱动类的高级方法，例如：
+如果你想获取当前的原始缓存对象可以通过`handler()`方法
 
 ```js
-// 获取缓存对象句柄
-const handler = store.handler()
+// 原始缓存对象
+const localStorage = store.handler()
+
+// 然后您可以调用缓存对象中原本的方法
+localStorage.getItem("bgcolor")
 ```
+
+> [!WARNING]
+> 原始的缓存对象是根据您的配置参数或者[切换到对应的缓存类型](#切换缓存类型),返回的就是对应的缓存对象
 
 ### 助手函数
 
@@ -293,3 +299,6 @@ const mystore = store.create({ type: "session", prefix: "my_", expire: 10 }) //�
 // 还是相同方式调用方法
 mystore.set("name", "value", 3600)
 ```
+
+> [!TIP]
+> 可以参考有哪些[选项](/reference/options#选项)

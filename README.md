@@ -23,7 +23,12 @@
 
 ## 浏览器支持
 
-具体可以查看[.browserslistrc](https://github.com/ajiho/just-store.js/blob/main/.browserslistrc)文件。
+`just-store.js` 支持所有支持 `localStorage` / `sessionStorage`的现代浏览器 :
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
 
 ## 变更日志
 

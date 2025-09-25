@@ -72,11 +72,13 @@ class Store {
   get(key: string, defaultValue: any = null) {
     const cacheValue = this.#store.getItem(this.#getKey(key))
     if (cacheValue) {
-      const parsedValue = this.#config.deserialize(cacheValue)
-      if (parsedValue.expire === 0 || parsedValue.expire >= Date.now()) {
-        return parsedValue.value
-      }
-      this.delete(key)
+      try {
+        const parsedValue = this.#config.deserialize(cacheValue)
+        if (parsedValue.expire === 0 || parsedValue.expire >= Date.now()) {
+          return parsedValue.value
+        }
+        this.delete(key)
+      } catch (_error) {}
       return null
     } else {
       if (isFunction(defaultValue)) {

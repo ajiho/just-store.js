@@ -1,6 +1,6 @@
 {
   "name": "just-store.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Make the APIs of LocalStorage and SessionStorage easier",
   "repository": "github:ajiho/just-store.js",
   "bugs": {

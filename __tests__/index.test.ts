@@ -20,6 +20,14 @@ describe("Store 基础功能", () => {
     expect(store.get("name")).toBe("jack")
   })
 
+  it("缓存结构被破坏时不应该报错", () => {
+    localStorage.setItem("foo", "test")
+
+    expect(() => {
+      store.get("foo")
+    }).not.throw()
+  })
+
   it("设置缓存-支持过期时间", () => {
     store.set("name", "jack", 1)
     expect(store.get("name")).toBe("jack")

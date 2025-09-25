@@ -1,6 +1,4 @@
-import { readFileSync, writeFileSync } from "node:fs"
 import { createRequire } from "node:module"
-import { resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import { execa } from "execa"
 import c from "picocolors"
@@ -76,7 +74,13 @@ async function main() {
   // 更新版本号
   step("\nUpdating the package version...")
 
-  updatePackage(targetVersion)
+  await run("npm", [
+    "version",
+    targetVersion,
+    "--no-git-tag-version",
+    "--no-commit-hooks",
+    "--allow-same-version",
+  ])
 
   //生成变更日志
   step("\nGenerating the changelog...")
@@ -115,22 +119,6 @@ async function main() {
   step("\nPushing to GitHub...")
   await run("git", ["push", "origin", `refs/tags/v${targetVersion}`])
   await run("git", ["push", "--no-verify"])
-}
-
-function updatePackage(version) {
-  const files = ["package.json", "package-lock.json"]
-
-  files.forEach((file) => {
-    const pkgPath = resolve(resolve(dir, ".."), file)
-    const pkg = JSON.parse(readFileSync(pkgPath, "utf-8"))
-    pkg.version = version
-
-    if (pkg.packages && pkg.packages[""]) {
-      pkg.packages[""].version = version
-    }
-
-    writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + "\n")
-  })
 }
 
 main().catch((err) => console.error(err))
